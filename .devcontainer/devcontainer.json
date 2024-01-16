@@ -7,7 +7,6 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ms-vscode-remote.vscode-remote-extensionpack"
 			]
 		}
 	}
