@@ -7,6 +7,7 @@ const { join } = require("node:path");
 const { Server } = require("socket.io");
 
 let posY = 0;
+let axis = "none";
 
 const server = http.createServer((req, res) => {
     let filePath = path.join(__dirname, req.url === "/" ? "index.html"
@@ -59,12 +60,13 @@ const server = http.createServer((req, res) => {
 const io = new Server(server);
 
 io.on("connection", (socket) => {
-    socket.on("requests", (arg) => {
+    socket.on("requests", (arg, arg2) => {
         posY = arg;
+        axis = arg2;
         console.log(posY)
     })
     socket.on("update", (arg) => {
-        socket.emit("responses", posY);
+        socket.emit("responses", posY, axis);
     })
     //socket.on("chat message", (msg) => {
         //io.emit("chat message", msg);
